@@ -1,0 +1,171 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --font-display: var(--app-font-display);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+}
+
+:root {
+  /* LIGHT MODE - keeping it high-contrast athletic but light */
+  --background: 210 20% 98%; /* Light cool gray */
+  --foreground: 222 47% 11%; /* Navy slate */
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 16 100% 50%; /* Electric Orange */
+  
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --card-border: 214 32% 91%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --popover-border: 214 32% 91%;
+  
+  --primary: 16 100% 50%; /* Electric Orange */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 222 47% 11%; /* Deep Navy */
+  --secondary-foreground: 210 40% 98%;
+  
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --app-font-sans: 'Inter', sans-serif;
+  --app-font-display: 'Teko', sans-serif;
+  --app-font-mono: Menlo, monospace;
+  
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* DARK MODE - The default high-energy athletic mode */
+  --background: 222 47% 7%; /* Very deep navy/black */
+  --foreground: 210 40% 98%; /* Off-white */
+  
+  --border: 215 28% 17%;
+  --input: 215 28% 17%;
+  --ring: 16 100% 50%; /* Electric Orange */
+  
+  --card: 222 47% 9%;
+  --card-foreground: 210 40% 98%;
+  --card-border: 215 28% 17%;
+  
+  --popover: 222 47% 9%;
+  --popover-foreground: 210 40% 98%;
+  --popover-border: 215 28% 17%;
+  
+  --primary: 16 100% 50%; /* Electric Orange */
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 217 33% 17%; /* Lighter Navy */
+  --secondary-foreground: 210 40% 98%;
+  
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20.2% 65.1%;
+  
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    @apply font-display uppercase tracking-wider;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-background/60 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-rose-500;
+  }
+
+  .text-gradient-cool {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
+  }
+  
+  .sports-pattern {
+    background-image: radial-gradient(hsl(var(--primary) / 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
